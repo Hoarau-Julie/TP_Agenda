@@ -1,6 +1,7 @@
 package agenda;
 
 import java.time.*;
+import java.util.*;
 
 public class Event {
 
@@ -18,6 +19,9 @@ public class Event {
      * The durarion of the event 
      */
     private Duration myDuration;
+    
+    
+    public LinkedList<Event> events = new LinkedList<>() ;
 
 
     /**
@@ -40,9 +44,19 @@ public class Event {
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        // TODO 
+        boolean inDay = false;
+        LocalDateTime myFinish = myStart.plus(myDuration);
+        if(aDay.isEqual(myStart.toLocalDate()) || aDay.isEqual(myFinish.toLocalDate()))
+        {
+            inDay = true;
+        }
+        else if(aDay.isAfter(myStart.toLocalDate()) && aDay.isBefore(myFinish.toLocalDate())){
+            inDay = true;
+        }
+        return inDay;
     }
+    
    
     /**
      * @return the myTitle
@@ -66,6 +80,9 @@ public class Event {
         return myDuration;
     }
 
-   
+    @Override
+    public String toString() {
+        return "Event{" + "myTitle=" + myTitle + ", myStart=" + myStart + ", myDuration=" + myDuration + ", events=" + events + '}';
+    }
     
 }

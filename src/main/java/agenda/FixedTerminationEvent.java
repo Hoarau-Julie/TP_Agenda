@@ -10,7 +10,13 @@ import java.time.temporal.ChronoUnit;
  * a given number of occurrences
  */
 public class FixedTerminationEvent extends RepetitiveEvent {
+    
 
+    
+    private LocalDate myTI;
+    
+    
+    private long myNumberOfOccurrences;
     
     /**
      * Constructs a fixed terminationInclusive event ending at a given date
@@ -29,7 +35,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
          super(title, start, duration, frequency);
         // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.myTI = terminationInclusive;
 
     }
 
@@ -49,22 +55,22 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        // TODO 
+        this.myNumberOfOccurrences = numberOfOccurrences;
     }
 
     /**
      *
      * @return the termination date of this repetitive event
      */
-    public LocalDate getTerminationDate() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");   
+     public LocalDate getTerminationDate() {
+        LocalDate terminationDate = this.getStart().plus(this.myNumberOfOccurrences-1,myFrequency).toLocalDate();
+        return terminationDate;
     }
 
     public long getNumberOfOccurrences() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        long numberOfOccurrences = this.myNumberOfOccurrences = this.getFrequency().between(this.getStart().toLocalDate(), myTI)+1;
+        return numberOfOccurrences;
     }
         
 }
