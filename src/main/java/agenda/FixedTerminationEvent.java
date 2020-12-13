@@ -63,7 +63,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      *
      * @return the termination date of this repetitive event
      */
-     public LocalDate getTerminationDate() {
+    public LocalDate getTerminationDate() {
         LocalDate terminationDate = this.getStart().plus(this.myNumberOfOccurrences-1,myFrequency).toLocalDate();
         return terminationDate;
     }
